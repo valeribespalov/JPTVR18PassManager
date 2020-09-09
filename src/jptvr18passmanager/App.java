@@ -5,6 +5,9 @@
  */
 package jptvr18passmanager;
 
+import classes.NewResource;
+import classes.NewResource;
+import classes.SaveToFile;
 import entity.Resource;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +21,12 @@ import javax.annotation.Resources;
  */
 class App {
     private List<Resource> listResources = new ArrayList<>();
+    private SaveToFile saveToFile = new SaveToFile();
+
+    public App() {
+        listResources.addAll(saveToFile.loadListResources());
+    }
+    
     public void run(){
         System.out.println("--- Менеджер паролей --- ");
         String repeat = "r";
@@ -37,11 +46,15 @@ class App {
                 case 1:
                     System.out.println("   Выбрана задача 1 ");
                     System.out.println("   ________________ ");
-                    Resource resource = new Resource();
-                    resource.setUrl("http://kutsehariduskeskus.ee");
-                    resource.setLogin("admin");
-                    resource.setPassword("123123");
-                    listResources.add(resource);
+                  //  Resource resource = new Resource();
+                  //  resource.setUrl("http://kutsehariduskeskus.ee");
+                  //  resource.setLogin("admin");
+                  //  resource.setPassword("123123");
+                  //  listResources.add(resource);
+                    NewResource nr = new NewResource();                 
+                    listResources.add(nr.createRecource()); 
+                    SaveToFile saveToFile = new SaveToFile();
+                    saveToFile.saveResource(listResources);
                     break;
                 case 2:
                     System.out.println("   Выбрана задача 2 ");

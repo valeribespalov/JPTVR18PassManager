@@ -5,13 +5,15 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author pupil
  */
-public class Resource {
+public class Resource implements Serializable{
+    private String name;
     private String url;
     private String login;
     private String password;
@@ -21,9 +23,13 @@ public class Resource {
     }
 
     public Resource(String url, String login, String password) {
+        this.name = name;
         this.url = url;
         this.login = login;
         this.password = password;
+    }
+    public String getName() {
+        return name;
     }
 
     public String getUrl() {
@@ -36,6 +42,10 @@ public class Resource {
 
     public String getPassword() {
         return password;
+    }
+    
+    public void setName(String url) {
+        this.url = name;
     }
 
     public void setUrl(String url) {
@@ -53,6 +63,7 @@ public class Resource {
     @Override
     public int hashCode() {
         int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.name);
         hash = 59 * hash + Objects.hashCode(this.url);
         hash = 59 * hash + Objects.hashCode(this.login);
         hash = 59 * hash + Objects.hashCode(this.password);
@@ -71,6 +82,9 @@ public class Resource {
             return false;
         }
         final Resource other = (Resource) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
         if (!Objects.equals(this.url, other.url)) {
             return false;
         }
@@ -85,7 +99,7 @@ public class Resource {
 
     @Override
     public String toString() {
-        return "Resource{" + "url=" + url + ", login=" + login + ", password=" + password + '}';
+        return "Resource{" + "name=" + name + "url=" + url + ", login=" + login + ", password=" + password + '}';
     }
     
 }
